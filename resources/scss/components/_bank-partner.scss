@@ -1,0 +1,56 @@
+.bank-partner {
+	margin-top: 35px;
+	margin-bottom: 95px;
+
+	@media screen and (max-width: 800px) {
+		margin-top: 15px;
+		margin-bottom: 53px;
+
+		.container{
+			padding: 0 calc(15px / 2);
+		}
+	}
+
+	&__inner {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__banks {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		@include adaptiv-value(gap, 16, 10, 1);
+
+		@media screen and (max-width: 500px) {
+			margin-right: auto;
+			margin-left: auto;
+			gap: 10px;
+		}
+	}
+
+	&__bank {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 40px;
+		width: 188px;
+		height: 52px;
+		box-shadow: 0 3.256px 13.187px 0 rgba(0, 0, 0, 0.09);
+		background-color: var(--white);
+		cursor: pointer;
+
+		@media screen and (max-width: 500px) {
+			width: 174px;
+		}
+	}
+
+	&__btn-show {
+		display: none;
+
+		@media screen and (max-width: 688px) {
+			display: flex;
+			margin-top: 25px;
+		}
+	}
+}

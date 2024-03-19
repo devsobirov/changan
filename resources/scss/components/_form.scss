@@ -1,0 +1,42 @@
+.form {
+	&__item {
+		position: relative;
+
+		& .just-validate-error-label {
+			position: absolute;
+			left: 30px;
+			top: 14px;
+			font-size: 13px;
+			transform: translateY(-50%);
+
+			@media screen and (max-width: 560px) {
+				left: 24px;
+				top: 10px;
+			}
+		}
+	}
+
+	&__input {
+		&.just-validate-error-field {
+			border: 1px solid #b81111;
+
+			&::placeholder {
+				color: #b81111;
+			}
+
+			~ .input__tel-text {
+				color: #b81111;
+			}
+		}
+
+		&.just-validate-success-field {
+			border: 1px solid #2ccd59;
+
+
+
+			~ .input__tel-text {
+				color: #2ccd59;
+			}
+		}
+	}
+}

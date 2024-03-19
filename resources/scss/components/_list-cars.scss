@@ -1,0 +1,127 @@
+.list-cars {
+	&__inner {
+		display: flex;
+		flex-direction: column;
+		margin-top: 35px;
+
+		@media screen and (max-width: 900px) {
+			margin-top: 30px;
+		}
+	}
+
+	&__list {
+		display: flex;
+		flex-wrap: wrap;
+		// justify-content: space-between;
+		margin-bottom: 25px;
+		gap: 20px 17px;
+
+		@media screen and (max-width: 900px) {
+			gap: 10px;
+		}
+	}
+
+	&__item {
+		border: 1px solid #f0f0f0;
+		border-radius: 30px;
+		padding: 9px 27px 10px 19px;
+		background-color: #f4f4f4;
+		cursor: pointer;
+
+		@media screen and (max-width: 900px) {
+			padding: 10px 7px 12px 10px;
+		}
+	}
+
+	&__item-img {
+		@media screen and (max-width: 900px) {
+			width: 139px;
+		}
+	}
+
+	&__item-model {
+		margin-top: -4px;
+		margin-bottom: 8px;
+		margin-left: 6px;
+		font-weight: 600;
+		font-size: 20px;
+		line-height: 120%;
+		color: var(--black);
+
+		@media screen and (max-width: 900px) {
+			margin-top: 0;
+			margin-bottom: 4px;
+			margin-left: 0;
+			font-size: 16px;
+		}
+	}
+
+	&__item-price {
+		display: flex;
+		align-items: center;
+		margin-left: 6px;
+
+		@media screen and (max-width: 900px) {
+			margin-left: -1px;
+		}
+	}
+
+	&__item-price-main {
+		margin-right: 14px;
+		font-weight: 600;
+		font-size: 28px;
+		line-height: 120%;
+		color: var(--blue);
+
+		@media screen and (max-width: 900px) {
+			margin-right: 3px;
+			font-size: 15px;
+
+			span {
+				margin-left: -4px;
+			}
+		}
+	}
+
+	&__item-price-old {
+		font-weight: 400;
+		font-size: 13px;
+		text-decoration: line-through;
+		color: var(--grey);
+
+		@media screen and (max-width: 900px) {
+			font-size: 11px;
+		}
+	}
+
+	&__btn {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border: 2px solid var(--black);
+		border-radius: 1000px;
+		padding: 17.5px 0;
+		width: 100%;
+		font-weight: 600;
+		font-size: 18px;
+		color: var(--black);
+		background-color: var(--white);
+		cursor: pointer;
+
+		svg{
+			margin-right: 10px;
+			width: 20px;
+			height: 21px;
+			
+			@media screen and (max-width: 900px) {
+				width: 16px;
+				height: 16px;
+			}
+		}
+
+		@media screen and (max-width: 900px) {
+			padding: 9.5px 0;
+			font-size: 12px;
+		}
+	}
+}

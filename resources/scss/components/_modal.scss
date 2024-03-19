@@ -1,0 +1,201 @@
+.modal {
+	z-index: -100;
+	display: none;
+
+	padding: 0 10px;
+	transition: all 0.3s ease;
+	inset: 0;
+	
+	&__inner {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		margin: 50px 0;
+		box-shadow: 0 -5px 0 var(--red);
+		background-color: var(--white);
+		@include adaptiv-value(border-radius, 50, 20, 1);
+	}
+
+	&__close {
+		position: absolute;
+		right: -52px;
+		top: 5px;
+		cursor: pointer;
+		@include adaptiv-value(width, 40, 35, 1);
+		@include adaptiv-value(height, 40, 35, 1);
+		
+		@media screen and (max-width: 730px) {
+			right: 15px;
+			top: -53px;
+		}
+	}
+
+	// модальное окно при успешном заполнении формы
+	&-sendForm{
+		padding: 0 10px;
+
+		& .modal__inner{
+			padding: 45px 47px 30px;
+			width: 100%;
+			max-width: 612px;
+			@media screen and (max-width: 560px) {
+				padding: 20px 13px;
+			}
+		}
+
+		&__title{
+			font-weight: 500;
+			@include adaptiv-value(font-size, 43, 28, 1);
+			line-height: 105%;
+			text-align: center;
+			color: #31333e;
+			@media screen and (max-width: 750px) {
+				font-weight: 700;
+			}
+		}
+
+		&__subtitle{
+			margin-top: 12px;
+			margin-bottom: 40px;
+			@include adaptiv-value(font-size, 20, 17, 1);
+			font-weight: 400;
+			line-height: 135%;
+			text-align: center;
+			color: #90929a;
+		}
+	}
+
+	&-regular{
+		.modal {
+			&__inner {
+				padding: 45px;
+				width: 100%;
+				max-width: 612px;
+				box-shadow: 0 -5px 0 0 var(--blue), 0 6px 22px 0 rgba(255, 255, 255, 0.37);
+				@media screen and (max-width: 540px) {
+					padding: 25px 20px;
+				}
+			}
+	
+			// &__close {
+			// }
+	
+			&__title {
+				font-weight: 500;
+				font-size: 43px;
+				line-height: 110%;
+				text-align: center;
+				color: var(--black);
+
+				@media screen and (max-width: 540px) {
+					font-size: 28px;
+				}
+			}
+	
+			&__subtitle {
+				margin-top: 12px;
+				margin-bottom: 40px;
+				font-weight: 400;
+				font-size: 20px;
+				line-height: 135%;
+				text-align: center;
+				color: var(--grey);
+
+				@media screen and (max-width: 540px) {
+					margin-bottom: 30px;
+					font-size: 17px;
+				}
+			}
+		}
+
+		.form {
+			display: flex;
+			flex-direction: column;
+			gap: 15px;
+
+			// &__item {
+			// }
+	
+			&__input {
+				border: 1px solid #d8d8d8;
+				border-radius: 40px;
+				padding: 20px 25px;
+				width: 100%;
+				font-weight: 500;
+				font-size: 20px;
+				color: var(--black);
+
+				@media screen and (max-width: 540px) {
+					font-size: 18px;
+				}
+			}
+	
+			&__item-btn {
+				border-radius: 40px;
+				padding: 20px 25px;
+				width: 100%;
+				font-weight: 500;
+				font-size: 20px;
+				color: var(--white);
+
+				@media screen and (max-width: 540px) {
+					font-size: 18px;
+				}
+			}
+		}
+
+		// .input {
+		// 	&__tel {
+		// 	}
+	
+		// 	&__name {
+		// 	}
+		// }
+
+		// .btn {
+		// }
+	
+	}
+
+	// открытое модальное окно
+	&.active {
+		position: fixed;
+		left: 0;
+		top: 0;
+		z-index: 50;
+		display: block;
+		overflow-y: auto;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.3);
+
+		// анимация для появления содержимого блока
+		& .modal__inner {
+			animation-name: show_modal;
+			animation-duration: 0.7s;
+			animation-timing-function: ease;
+			animation-fill-mode: forwards;
+		}
+
+		@keyframes show_modal {
+			0% {
+				transform: translateY(300px) scale(0.9);
+			}
+
+			100% {
+				transform: translateY(0) scale(1);
+			}
+		}
+
+		& .modal__body{
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 20px 10px;
+			min-height: 100%;
+			@media screen and (max-width: 560px) {
+				padding: 5px 10px 1px;
+			}
+		}
+	}
+}
