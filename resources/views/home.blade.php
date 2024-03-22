@@ -136,7 +136,7 @@
                     </div>
                     <div class="card-car__left-btns">
                         <button class='card-car__left-btn card-car__btn-blue btn' :data-title="selectedModel.name">Забронировать</button>
-                        <button class='card-car__left-btn card-car__btn-white btn' @click="initCreditRange(selectedModel.price); goToSection('#credit-section')">Рассчитать кредит</button>
+                        <button class='card-car__left-btn card-car__btn-white btn' @click="setCreditModel(selectedModel); initCreditRange(selectedModel.price); goToSection('#credit-section')">Рассчитать кредит</button>
                     </div>
                 </div>
 
@@ -196,21 +196,24 @@
                         Рассчитайте автокредит
                     </div>
 
-                    <div class="calc-credit__top-selects">
+                    <div class="calc-credit__top-selects" x-data="{model_id: null}">
 
                         <div class="calc-credit__top-input-select input-select">
 
                             <div class="calc-credit__top-input-select-text input-select__text">
-                                <span class='input-select__text-inner'>Выберите модель</span>
+                                <span class='input-select__text-inner' @click="initCreditRange()" id="default-model-input">Выберите модель</span>
                                 <svg class='calc-credit__top-input-select__icon input-select__icon'>
                                     <use href="img/sprite.svg#arrow-down"></use>
                                 </svg>
                             </div>
 
                             <ul class='calc-credit__top-select input-select__options'>
-                                <li class="calc-credit__top-option input-select__option">ALSVIN 1</li>
-                                <li class="calc-credit__top-option input-select__option">ALSVIN 2</li>
-                                <li class="calc-credit__top-option input-select__option">ALSVIN 3</li>
+                                @foreach($models as $model)
+                                    <li class="calc-credit__top-option input-select__option"
+                                        @click="model_id = '{{$model->id}}'; initCreditRange('{{$model->min_price}}')"
+                                        data-price="{{$model->min_price}}" data-model-id="{{$model->id}}"
+                                    >{{$model->name}}</li>
+                                @endforeach
                             </ul>
 
                         </div>
@@ -225,9 +228,13 @@
                             </div>
 
                             <ul class='calc-credit__top-select input-select__options'>
-                                <li class="calc-credit__top-option input-select__option">комплектацию 1</li>
-                                <li class="calc-credit__top-option input-select__option">комплектацию 2</li>
-                                <li class="calc-credit__top-option input-select__option">комплектацию 3</li>
+                                @foreach($models as $model)
+                                    @foreach($model->body->prices as $item)
+                                    <li class="calc-credit__top-option input-select__option"
+                                        x-cloak="" x-show="!model_id || model_id === '{{$model->id}}'" @click="initCreditRange('{{$item->price}}')"
+                                    >{{$model->name}} {{$item->complectation->name}} {{$item->modification->name}}</li>
+                                    @endforeach
+                                @endforeach
                             </ul>
 
                         </div>
@@ -1041,6 +1048,16 @@
 
     }
 
+    const carModelsSelect = document.querySelectorAll('ul.calc-credit__top-select.input-select__options li');
+
+    function setCreditModel(model) {
+        carModelsSelect.forEach(li => {
+            if (li.getAttribute('data-model-id') === `${model.id}`) {
+                li.click();
+                document.querySelector('#default-model-input').innerHTML = model.name;
+            }
+        })
+    }
     const rangeSliders = document.querySelectorAll('.range-slider');
 
     let mainColor = '#d5d5d5';
