@@ -14,6 +14,9 @@ const modal = (btnOpen, modal, btnClose, isLink = false) => {
 	modal = document.querySelector(modal);
 	const modalClose = modal.querySelector('.modal__body');
 	btnClose = document.querySelector(btnClose);
+	let title = btnOpen.getAttribute('data-title');
+    modal.querySelector('.modal__title').innerText = title ? title : "Заказать звонок";
+
 	const body = document.body;
 	const removeActiveClassModal = () => {
 		removeClass(body, '_lock');

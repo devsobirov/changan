@@ -2,6 +2,7 @@ import { addClass, containsClass, removeClass } from './helpers.js';
 import modal from './modal.js';
 
 modal('.header__info-link', '.modal-order-phone', '.modal-order-phone .modal__close');
+modal('.credit__btn', '.modal-order-phone', '.modal-order-phone .modal__close');
 
 modal('.card-car__btn-blue', '.modal-reserve', '.modal-reserve .modal__close');
 
@@ -23,6 +24,7 @@ document.querySelectorAll('.configuration__list').forEach(list => {
 
 			const btnClose = document.querySelector('.modal-reserve .modal__close');
 			const body = document.body;
+			modal.querySelector('.modal__title').innerHTML = btnOpen.getAttribute('data-title');
 
 			const removeActiveClassModal = () => {
 				removeClass(body, '_lock');

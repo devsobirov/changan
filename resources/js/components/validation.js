@@ -4,6 +4,15 @@ import './../vendor/inputMask.js';
 // formSelector --- класс формы
 
 const successFormSend = event => {
+    let data = new FormData(event.target);
+
+    try {
+        let response = axios.post('/apply-form', data);
+        console.log(response)
+    } catch (e) {
+        console.log(e)
+    }
+
 	event.target.reset();
 
 	document.querySelectorAll('.form')?.forEach(form => {

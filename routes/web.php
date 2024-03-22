@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MainController;
+use App\Http\Controllers\ChanganController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,10 +14,10 @@ use App\Http\Controllers\MainController;
 |
 */
 
-Route::view('/', 'template');
+Route::get('/', [ChanganController::class, 'index']);
+Route::post('/apply-form', [ChanganController::class, 'applyForm'])->name('apply-form');
 //Route::get('/', [MainController::class, 'index'])->name('home');
 //Route::get('/get-models/{catalog:title?}', [MainController::class, 'getModels'])->name('get-models');
 //Route::get('/get-cars/{carModel:id?}', [MainController::class, 'getCars'])->name('get-cars');
 //Route::get('/filter-cars', [MainController::class, 'filterCars'])->name('filter-cars');
-//Route::post('/apply-form', [MainController::class, 'applyForm'])->name('apply-form');
-Route::get('/template', [MainController::class, 'template']);
+Route::view('/template', 'template');
