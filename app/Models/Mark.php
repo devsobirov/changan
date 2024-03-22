@@ -18,4 +18,9 @@ class Mark extends Model
     {
         return $this->hasMany(\App\Models\Model::class, 'mark_id');
     }
+
+    public function getNameAttribute($value)
+    {
+        return strtoupper($value);
+    }
 }

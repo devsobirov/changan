@@ -14,6 +14,11 @@
         .card-car__left-img img {display: block; height: 320px}
         .configuration__lists {align-self: unset;}
         .configuration__lists-img img {display: block; max-height: 120%}
+
+        @media (max-width: 768px) {
+            .list-cars__item {max-width: 48%; width: 48%;}
+            .list-cars__item .img-container {height: auto;}
+        }
     </style>
 
 </head>
@@ -69,7 +74,7 @@
         <div class="container">
             <div class="subheader__inner">
                 <h1 class='subheader__title'>
-                    Только 3 дня ликвидируем склад CHANGAN по ценам 2023 года
+                    Только 3 дня ликвидируем склад {{$mark->name}} по ценам 2023 года
                 </h1>
                 <ul class="subheader__list">
                     <li class="subheader__item">
@@ -629,7 +634,7 @@
                                 <div class="configuration__lists-top">
                                     <div class="configuration__lists-info">
                                         <div class="configuration__lists-model">
-                                            {{$model->name}} {{$item->complectation->name}}
+                                            {{strtoupper($model->name)}} {{strtoupper($item->complectation->name)}}
                                         </div>
                                         <div class="configuration__lists-data">
                                             {{$item->modification->name}}
