@@ -18,6 +18,7 @@
         @media (max-width: 768px) {
             .list-cars__item {max-width: 48%; width: 48%;}
             .list-cars__item .img-container {height: auto;}
+            .card-car__left-img img {height: auto;}
         }
     </style>
 
