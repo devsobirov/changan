@@ -100,8 +100,8 @@
                 <ul class="list-cars__list">
                     @foreach($models as $model)
                         @if($model->total_complectations)
-                        <li class="list-cars__item" x-data="{item: JSON.parse(`{{json_encode($model->baseCardData())}}`)}"
-                            @click="setSelectedModel(item)">
+                        <li class="list-cars__item"
+                            @click="goToSection('#car-card-'+'{{$model->id}}')">
                             <div class="img-container">
                                 <img class="list-cars__item-img" src='{{$model->body->image_url()}}' />
                             </div>
@@ -128,27 +128,29 @@
         </div>
     </div>
 
+    @foreach($models as $model)
+        @if($model->total_complectations)
     <!-- card-car -->
-    <div class="card-car" x-show="selectedModel" x-cloak id="car-card">
+        <div class="card-car" id="car-card-{{$model->id}}">
         <div class="container">
             <div class="card-car__inner">
 
                 <div class="card-car__left">
-                    <div class="card-car__left-title" x-text="selectedModel.name"></div>
-                    <div class="card-car__left-subtitle" x-text="`${selectedModel.total} а/м в наличии`"></div>
+                    <div class="card-car__left-title">{{$model->name}}</div>
+                    <div class="card-car__left-subtitle">{{$model->total_complectations}} а/м в наличии</div>
                     <div class="card-car__left-img">
-                        <img :src="selectedModel.image" :alt="selectedModel.name">
+                        <img src="{{$model->body->image_url()}}" alt="{{$model->name}}">
                     </div>
                     <div class="card-car__left-btns">
-                        <button class='card-car__left-btn card-car__btn-blue btn' :data-title="selectedModel.name">Забронировать</button>
-                        <button class='card-car__left-btn card-car__btn-white btn' @click="setCreditModel(selectedModel); initCreditRange(selectedModel.price); goToSection('#credit-section')">Рассчитать кредит</button>
+                        <button class='card-car__left-btn card-car__btn-blue btn' data-title="Забронировать {{$model->name}}">Забронировать</button>
+                        <button class='card-car__left-btn card-car__btn-white btn' @click="setCreditModel(JSON.parse(`{{json_encode($model->baseCardData())}}`)); initCreditRange('{{$model->min_price}}'); goToSection('#credit-section')">Рассчитать кредит</button>
                     </div>
                 </div>
 
                 <div class="card-car__right">
-                    <div class="card-car__right-price ">от <span class='total-price' x-text="selectedModel ? selectedModel.price : 1667000"></span> ₽</div>
+                    <div class="card-car__right-price ">от <span class='total-price'>{{$model->min_price}}</span> ₽</div>
                     <div class="card-car__right-price-month">
-                        В кредит от <span x-text="selectedModel.price_credit"></span>₽ /мес.
+                        В кредит от <span>{{$model->credit_price}}</span>₽ /мес.
                     </div>
                     <ul class="card-car__right-advantages">
                         <li class="card-car__right-advantages-item">
@@ -174,6 +176,7 @@
                         Зафиксировать цену и получить промокод на скидку 25%
                     </div>
                     <form class="card-car__right-form form">
+                        <input type="hidden" name="Модель" value="{{$mark->name}} {{$model->name}}">
                         <div class="form__item">
                             <input class="form__input input__tel" type="tel" name="Телефон" placeholder="Номер телефона" />
                         </div>
@@ -188,6 +191,8 @@
             </div>
         </div>
     </div>
+        @endif
+    @endforeach
     <!-- calc-credit -->
     <div class="calc-credit" id="credit-section">
         <div class="container">
@@ -1013,7 +1018,7 @@
 
     yandexiniti();
 </script>
-<script src="{{asset('js/app.js')}}"></script>
+<script src="{{asset('js/app.js')}}?v=3"></script>
 <script>
     function appData () {
         return {
@@ -1080,8 +1085,6 @@
         const monthPay = document.querySelector('.month-pay');
         const firstPayCurrent = Number(document.querySelector('.first-pay').innerHTML.split(' ')[0].replaceAll('&nbsp;', ''));
         const creditTermCurrent = Number(document.querySelector('.range-credit-term').value);
-        // console.log(firstPayCurrent, creditTermCurrent);
-        // console.log(firstPayCurrent / creditTermCurrent);
         monthPay.innerHTML = Number(((totalPrice - firstPayCurrent) / creditTermCurrent).toFixed(0)).toLocaleString();
     };
 
